@@ -61,17 +61,32 @@ Vue.component('firebase-auth-ui', {
                 isAnonymous: null,
                 uid: null,
                 providerData: null
-            }
+            },
+            ui: null
+        }
+    },
+    methods: {
+        signOut() {
+            firebase.auth().signOut().then(function () {
+                console.log("User sign out successfull");
+            }).catch(function (error) {
+                // An error happened.
+            });
         }
     },
     created: function () {
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        ui.start('#firebaseui-auth-container', uiConfig);
-
         var self = this;
+        
+        if (self.ui) {
+            self.ui.reset();
+        } else {
+            self.ui = new firebaseui.auth.AuthUI(firebase.auth());
+        }
+        self.ui.start('#firebaseui-auth-container', uiConfig);
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
+                console.log('User is signed in');
                 self.user.displayName = user.displayName;
                 self.user.email = user.email;
                 self.user.emailVerified = user.emailVerified;
@@ -79,16 +94,32 @@ Vue.component('firebase-auth-ui', {
                 self.user.isAnonymous = user.isAnonymous;
                 self.user.uid = user.uid;
                 self.user.providerData = user.providerData;
-                console.log('User is signed in');
+
             } else {
                 console.log("User is not signed in");
+                self.user.displayName = null;
+                self.user.email = null;
+                self.user.emailVerified = null;
+                self.user.photoURL = null;
+                self.user.isAnonymous = null;
+                self.user.uid = null;
+                self.user.providerData = null;
             }
         });
-        console.dir(self);
+    },
+    updated: function () {
+        var self = this;
+        if (self.ui) {
+            self.ui.reset();
+        } else {
+            self.ui = new firebaseui.auth.AuthUI(firebase.auth());
+        }
+        self.ui.start('#firebaseui-auth-container', uiConfig);
     },
     template: `<div>
         <div v-if="user.email">
             <p> you are signed in: {{this.user.email}}</p>
+            <button v-on:click="signOut"> sign out </button>
         </div>
         <div v-else>
             <div id="firebaseui-auth-container"></div>
