@@ -52,7 +52,6 @@ var uiConfig = {
 Vue.component('firebase-auth-ui', {
     data: function () {
         return {
-            // email: this.$store.getters.email,
             ui: null
         }
     },
