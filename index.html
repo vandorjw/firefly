@@ -11,6 +11,7 @@
 
   <!-- I have chosen to use VueJS for this project.-->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 
@@ -29,11 +30,7 @@
     <!-- component matched by the route will render here -->
     <router-view></router-view>
     <firebase-auth-ui></firebase-auth-ui>
-
-
-
   </div>
-
 
   <!-- Javascript libraries required to render this page. -->
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
@@ -43,8 +40,16 @@
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 
+  <!-- Must remain before everything else-->
+  <script src="scripts/store.js"></script>
+
   <script src="scripts/firebase-config.js"></script>
   <script src="scripts/firebase-auth-config.js"></script>
+
+  <!--'pages' go here -->
+  <script src="scripts/profile-page.js"></script>
+
+  <!-- Must remain last to avoid undefined -->
   <script src="scripts/router.js"></script>
   <script src="scripts/app.js"></script>
 

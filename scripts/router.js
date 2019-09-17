@@ -3,7 +3,7 @@ const Bar = { template: '<div>bar</div>' }
 
 const routes = [
     { path: '/foo', component: Foo },
-    { path: '/bar', component: Bar }
+    { path: '/bar', component: Profile }
   ]
 
   const router = new VueRouter({
