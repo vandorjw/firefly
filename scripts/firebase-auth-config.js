@@ -1,5 +1,3 @@
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
 var uiConfig = {
 
     autoUpgradeAnonymousUsers: true,
@@ -49,26 +47,52 @@ var uiConfig = {
     privacyPolicyUrl: '#privacy-policy'
 };
 
-// Temp variable to hold the anonymous user data if needed.
-var data = null;
-// Hold a reference to the anonymous current user.
-var anonymousUser = firebase.auth().currentUser;
 
-ui.start('#firebaseui-auth-container', uiConfig);
+// Define a new component firebase-auth-ui
+Vue.component('firebase-auth-ui', {
+    data: function () {
+        return {
+            // Hold a reference to the current user.
+            user: {
+                displayName: null,
+                email: null,
+                emailVerified: null,
+                photoURL: null,
+                isAnonymous: null,
+                uid: null,
+                providerData: null
+            }
+        }
+    },
+    created: function () {
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        ui.start('#firebaseui-auth-container', uiConfig);
 
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        // User is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        console.log('User is signed in');
-    } else {
-        console.log("User is not signed in");
+        var self = this;
 
-    }
-});
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                self.user.displayName = user.displayName;
+                self.user.email = user.email;
+                self.user.emailVerified = user.emailVerified;
+                self.user.photoURL = user.photoURL;
+                self.user.isAnonymous = user.isAnonymous;
+                self.user.uid = user.uid;
+                self.user.providerData = user.providerData;
+                console.log('User is signed in');
+            } else {
+                console.log("User is not signed in");
+            }
+        });
+        console.dir(self);
+    },
+    template: `<div>
+        <div v-if="user.email">
+            <p> you are signed in: {{this.user.email}}</p>
+        </div>
+        <div v-else>
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">Loading...</div>
+        </div>
+    </div>`
+})
