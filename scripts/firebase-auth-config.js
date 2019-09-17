@@ -52,22 +52,19 @@ var uiConfig = {
 Vue.component('firebase-auth-ui', {
     data: function () {
         return {
-            // Hold a reference to the current user.
-            user: {
-                displayName: null,
-                email: null,
-                emailVerified: null,
-                photoURL: null,
-                isAnonymous: null,
-                uid: null,
-                providerData: null
-            },
+            // email: this.$store.getters.email,
             ui: null
+        }
+    },
+    computed: {
+        email: function () {
+            return this.$store.getters.email
         }
     },
     methods: {
         signOut() {
             firebase.auth().signOut().then(function () {
+                store.commit('logout');
                 console.log("User sign out successfull");
             }).catch(function (error) {
                 // An error happened.
@@ -76,7 +73,7 @@ Vue.component('firebase-auth-ui', {
     },
     created: function () {
         var self = this;
-        
+
         if (self.ui) {
             self.ui.reset();
         } else {
@@ -86,24 +83,10 @@ Vue.component('firebase-auth-ui', {
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
+                store.commit('login', user);
                 console.log('User is signed in');
-                self.user.displayName = user.displayName;
-                self.user.email = user.email;
-                self.user.emailVerified = user.emailVerified;
-                self.user.photoURL = user.photoURL;
-                self.user.isAnonymous = user.isAnonymous;
-                self.user.uid = user.uid;
-                self.user.providerData = user.providerData;
-
             } else {
                 console.log("User is not signed in");
-                self.user.displayName = null;
-                self.user.email = null;
-                self.user.emailVerified = null;
-                self.user.photoURL = null;
-                self.user.isAnonymous = null;
-                self.user.uid = null;
-                self.user.providerData = null;
             }
         });
     },
@@ -117,8 +100,8 @@ Vue.component('firebase-auth-ui', {
         self.ui.start('#firebaseui-auth-container', uiConfig);
     },
     template: `<div>
-        <div v-if="user.email">
-            <p> you are signed in: {{this.user.email}}</p>
+        <div v-if="email">
+            <p> you are signed in: {{email}}</p>
             <button v-on:click="signOut"> sign out </button>
         </div>
         <div v-else>
