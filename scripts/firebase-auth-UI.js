@@ -1,14 +1,8 @@
 var uiConfig = {
-
-    autoUpgradeAnonymousUsers: true,
-
+    // autoUpgradeAnonymousUsers: true,
     callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
             return true;
-
         },
         uiShown: function () {
             // The widget is rendered.
@@ -25,10 +19,6 @@ var uiConfig = {
             }
             // The credential the user tried to sign in with.
             var cred = error.credential;
-            // Copy data from anonymous user to permanent user and delete anonymous
-            // user.
-            // ...
-            // Finish sign-in after data is copied.
             return firebase.auth().signInWithCredential(cred);
         }
 
@@ -45,30 +35,8 @@ var uiConfig = {
     privacyPolicyUrl: '/#/privacy-policy'
 };
 
-
 // Define a new component firebase-auth-ui
 const AuthUI = Vue.component('firebase-auth-ui', {
-    computed: {
-        email: function () {
-            return this.$store.getters.email
-        }
-    },
-    methods: {
-        signOut() {
-            firebase.auth().signOut().then(function () {
-                store.commit('logout');
-            }).catch(function (error) {
-                // An error happened.
-            });
-        },
-        signIn() {
-            firebase.auth().onAuthStateChanged(function (user) {
-                if (user) {
-                    store.commit('login', user);
-                }
-            });
-        }
-    },
     mounted: function () {
         let ui = firebaseui.auth.AuthUI.getInstance();
         if (!ui) {
@@ -85,9 +53,9 @@ const AuthUI = Vue.component('firebase-auth-ui', {
 
 
     },
-    template: `<div class="medium-12 cell align-center">
-        <div id="firebaseui-auth-container"></div>
-        <div id="loader">Loading...</div>
-        <button v-on:click="signOut"> sign out </button>
-    </div>`
+    template: `
+        <div class="medium-12 cell align-center">
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">Loading...</div>
+        </div>`
 })

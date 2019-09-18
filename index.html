@@ -28,16 +28,21 @@
       <div class="top-bar-right">
         <ul class="menu">
           <li>
-            <router-link to="/foo">One</router-link>
+            <router-link to="/profile">Profile</router-link>
           </li>
           <li>
-            <router-link to="/bar">Two</router-link>
+            <router-link to="/foo">Foo</router-link>
           </li>
           <li>
-            <router-link to="/foo">Three</router-link>
+            <router-link to="/bar">Bar</router-link>
           </li>
-          <li>
-            <router-link to="/auth">login</router-link>
+          <li v-if="user">
+              <router-link to="/auth">
+                <span @click="signOut">Logout</span>
+              </router-link>
+          </li>
+          <li v-else>
+            <router-link to="/auth">Login</router-link>
           </li>
         </ul>
       </div>
@@ -58,7 +63,7 @@
   </div>
 
   <!-- Javascript libraries required to render this page. -->
-  <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
 
@@ -67,11 +72,10 @@
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 
-  <!-- Must remain before everything else-->
-  <script src="scripts/store.js"></script>
-
   <script src="scripts/firebase-config.js"></script>
-  <script src="scripts/firebase-auth-config.js"></script>
+  <script src="scripts/firebase-auth-UI.js"></script>
+    <!-- Must remain before everything else-->
+    <script src="scripts/store.js"></script>
 
   <!--'pages' go here -->
   <script src="scripts/profile-page.js"></script>
