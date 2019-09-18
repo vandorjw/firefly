@@ -41,20 +41,13 @@ var uiConfig = {
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID
     ],
-    // Terms of service url.
-    tosUrl: '#terms-of-service',
-    // Privacy policy url.
-    privacyPolicyUrl: '#privacy-policy'
+    tosUrl: '/#/terms-of-service',
+    privacyPolicyUrl: '/#/privacy-policy'
 };
 
 
 // Define a new component firebase-auth-ui
-Vue.component('firebase-auth-ui', {
-    data: function () {
-        return {
-            ui: null
-        }
-    },
+const AuthUI = Vue.component('firebase-auth-ui', {
     computed: {
         email: function () {
             return this.$store.getters.email
@@ -64,48 +57,37 @@ Vue.component('firebase-auth-ui', {
         signOut() {
             firebase.auth().signOut().then(function () {
                 store.commit('logout');
-                console.log("User sign out successfull");
             }).catch(function (error) {
                 // An error happened.
             });
+        },
+        signIn() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    store.commit('login', user);
+                }
+            });
         }
     },
-    created: function () {
-        var self = this;
-
-        if (self.ui) {
-            self.ui.reset();
-        } else {
-            self.ui = new firebaseui.auth.AuthUI(firebase.auth());
+    mounted: function () {
+        let ui = firebaseui.auth.AuthUI.getInstance();
+        if (!ui) {
+          ui = new firebaseui.auth.AuthUI(firebase.auth());
         }
-        self.ui.start('#firebaseui-auth-container', uiConfig);
-
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                store.commit('login', user);
-                console.log('User is signed in');
-            } else {
-                console.log("User is not signed in");
-            }
-        });
+        ui.start('#firebaseui-auth-container', uiConfig);
     },
     updated: function () {
-        var self = this;
-        if (self.ui) {
-            self.ui.reset();
-        } else {
-            self.ui = new firebaseui.auth.AuthUI(firebase.auth());
+        let ui = firebaseui.auth.AuthUI.getInstance();
+        if (!ui) {
+          ui = new firebaseui.auth.AuthUI(firebase.auth());
         }
-        self.ui.start('#firebaseui-auth-container', uiConfig);
+        ui.start('#firebaseui-auth-container', uiConfig);
+
+
     },
-    template: `<div>
-        <div v-if="email">
-            <p> you are signed in: {{email}}</p>
-            <button v-on:click="signOut"> sign out </button>
-        </div>
-        <div v-else>
-            <div id="firebaseui-auth-container"></div>
-            <div id="loader">Loading...</div>
-        </div>
+    template: `<div class="medium-12 cell align-center">
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
+        <button v-on:click="signOut"> sign out </button>
     </div>`
 })

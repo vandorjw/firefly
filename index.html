@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Hello, world!</title>
 
+  <link type="text/css" rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation.min.css" />
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
   <!-- I have chosen to use VueJS for this project.-->
@@ -16,23 +18,48 @@
 </head>
 
 <body>
-
   <div id="app">
-    {{ message }}
-    <p>
-      <!-- use router-link component for navigation. -->
-      <!-- specify the link by passing the `to` prop. -->
-      <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
-      <router-link to="/foo">Go to Foo</router-link>
-      <router-link to="/bar">Go to Bar</router-link>
-    </p>
-    <!-- route outlet -->
-    <!-- component matched by the route will render here -->
-    <router-view></router-view>
-    <firebase-auth-ui></firebase-auth-ui>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text">Firefly</li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li>
+            <router-link to="/foo">One</router-link>
+          </li>
+          <li>
+            <router-link to="/bar">Two</router-link>
+          </li>
+          <li>
+            <router-link to="/foo">Three</router-link>
+          </li>
+          <li>
+            <router-link to="/auth">login</router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout large primary">
+      <div class="text-center">
+        <h1>{{ message }}</h1>
+      </div>
+    </div>
+
+    <article class="grid-container">
+      <div class="grid-x grid-margin-x" id="content">
+        <!-- route outlet -->
+        <router-view></router-view>
+      </div>
+    </article>
   </div>
 
   <!-- Javascript libraries required to render this page. -->
+  <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
 
   <!-- Add Firebase products that you want to use -->
