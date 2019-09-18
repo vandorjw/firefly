@@ -5,7 +5,7 @@ const BlogList = Vue.component('BlogList', {
         }
     },
     template: `
-    <div>
+    <div class="grid-x grid-margin-x" id="content">
         <div class="medium-9 cell">
             <blog-post></blog-post>
             <blog-post></blog-post>
