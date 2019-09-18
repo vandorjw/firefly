@@ -15,10 +15,8 @@ const BlogList = Vue.component('BlogList', {
             firebase.firestore().collection('blogposts').get().then(querySnapshot => {
                 querySnapshot.forEach(function(doc) {
                     self.blogIds.push(doc.id);
-                    console.log(doc.id);
                 });
             })
-            console.log(self.blogIds);
         }
     },
     created() {
