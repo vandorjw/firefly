@@ -72,14 +72,14 @@ const AuthUI = Vue.component('firebase-auth-ui', {
     mounted: function () {
         let ui = firebaseui.auth.AuthUI.getInstance();
         if (!ui) {
-          ui = new firebaseui.auth.AuthUI(firebase.auth());
+            ui = new firebaseui.auth.AuthUI(firebase.auth());
         }
         ui.start('#firebaseui-auth-container', uiConfig);
     },
     updated: function () {
         let ui = firebaseui.auth.AuthUI.getInstance();
         if (!ui) {
-          ui = new firebaseui.auth.AuthUI(firebase.auth());
+            ui = new firebaseui.auth.AuthUI(firebase.auth());
         }
         ui.start('#firebaseui-auth-container', uiConfig);
 
