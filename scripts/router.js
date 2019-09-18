@@ -1,8 +1,5 @@
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
-
 const routes = [
-    { path: '/foo', component: Foo },
+    { path: '/tasks', component: TaskList },
     { path: '/blogs', component: BlogList },
     { path: '/profile', component: Profile },
     { path: '/auth', component: AuthUI }

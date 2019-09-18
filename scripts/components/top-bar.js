@@ -19,7 +19,7 @@ Vue.component('top-bar', {
         <div class="top-bar-right">
             <ul class="menu">
                 <li><router-link to="/profile">Profile</router-link></li>
-                <li><router-link to="/foo">Foo</router-link></li>
+                <li><router-link to="/tasks">Tasks</router-link></li>
                 <li><router-link to="/blogs">Blogs</router-link></li>
                 <li v-if="user"><router-link to="/auth"><span @click="signOut">Logout</span></router-link></li>
                 <li v-else><router-link to="/auth">Login</router-link></li>
