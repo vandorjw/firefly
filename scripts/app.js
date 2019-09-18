@@ -12,28 +12,17 @@ var app = new Vue({
   },
   methods: {
     checkAuthStatus() {
-      console.log("running checkAuthStatus()")
-
       return new Promise((resolve, reject) => {
         try {
           firebase.auth()
             .onAuthStateChanged(user => {
-              console.log('userChecked:', user)
               resolve(user);
             });
         } catch {
           reject('api failed')
         }
       });
-    },
-    signOut() {
-      firebase.auth().signOut().then(function () {
-        store.commit('logout');
-      }).catch(function (error) {
-        // An error happened.
-      });
     }
-
   },
   async created() {
     // when the app is created run the set user method
