@@ -26,7 +26,7 @@ const BlogList = Vue.component('BlogList', {
     <div class="grid-x grid-margin-x" id="content">
         <create-post v-if="user"></create-post>
         <div class="medium-9 cell">
-            <blog-post v-for="id in blogIds" :blogId='id'></blog-post>
+            <blog-post v-for="id in blogIds" v-bind:key="id" :blogId='id'></blog-post>
         </div>
         <sticky-container></sticky-container>
         <pagination-ui></pagination-ui>

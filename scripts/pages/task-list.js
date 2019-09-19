@@ -26,16 +26,13 @@ const TaskList = Vue.component('TaskList', {
         
     },
     updated() {
-        dragula([document.querySelector('#left'), document.querySelector('#right')]);
+        dragula([document.querySelector('#taskList')]);
     },
     template: `
     <div class="grid-x grid-margin-x small-up-2 medium-up-3">
-    <add-task></add-task>
-        <div class="small-6" id="left">
-            <task-card v-for="id in taskIds" :taskId='id'></task-card>
-        </div>
-        <div class="small-6" id="right">
-            <task-card v-for="id in taskIds" :taskId='id'></task-card>
+        <div class="small-6" id="taskList">
+            <add-task></add-task>
+            <task-card v-for="id in taskIds" v-bind:key="id" :taskId='id'></task-card>
         </div>
     </div>`
   })
