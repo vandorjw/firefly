@@ -15,7 +15,7 @@ Vue.component('task-card', {
     },
     methods: {
         getTask: function(taskId) {
-            let docRef = firebase.firestore().collection('tasks').doc(taskId);
+            let docRef = firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").doc(taskId);
             docRef.get().then(doc => {
                 this.task = doc.data();
             })
