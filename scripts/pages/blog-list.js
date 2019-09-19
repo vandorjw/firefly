@@ -24,7 +24,7 @@ const BlogList = Vue.component('BlogList', {
     },
     template: `
     <div class="grid-x grid-margin-x" id="content">
-        <create-post></create-post>
+        <create-post v-if="user"></create-post>
         <div class="medium-9 cell">
             <blog-post v-for="id in blogIds" :blogId='id'></blog-post>
         </div>

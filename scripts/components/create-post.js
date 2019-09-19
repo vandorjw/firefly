@@ -17,7 +17,8 @@ Vue.component('create-post', {
         addBlogPost: function() {
             firebase.firestore().collection('blogposts').add({
                 title: this.blog.title,
-                content: this.blog.content
+                content: this.blog.content,
+                author: this.$store.getters.user.uid
             })
             .then(docRef => {
                 console.log("Document written with ID: ", docRef.id);
