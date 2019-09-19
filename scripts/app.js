@@ -22,6 +22,29 @@ var app = new Vue({
           reject('api failed')
         }
       });
+    },
+    setUserCollection() {
+      if (this.user) {
+
+        let userDB = firebase.firestore().collection('users');
+        let docRef = userDB.doc(this.user.uid);
+
+        docRef.get().then(docSnapshot => {
+          if (docSnapshot.exists) {
+            // This userId exists in my firestore collection.
+            console.log('exists');
+          } else {
+            // This userId does not exist in my firestore collection.
+            docRef.set({}) // I just want to set the record, without any data.
+              .then(function () {
+                console.log("Document successfully written!");
+              })
+              .catch(function (error) {
+                console.error("Error writing document: ", error);
+              });
+          }
+        })
+      }
     }
   },
   async created() {
@@ -30,5 +53,6 @@ var app = new Vue({
     // check out mutations in the store.js file
     let user = await this.checkAuthStatus();
     this.$store.commit('login', user);
+    this.setUserCollection();
   }
 })
