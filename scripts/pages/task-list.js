@@ -27,6 +27,7 @@ const TaskList = Vue.component('TaskList', {
     },
     template: `
     <div class="grid-x grid-margin-x small-up-2 medium-up-3">
+    <add-task></add-task>
         <div class="small-6" id="left">
             <task-card v-for="id in taskIds" :taskId='id'></task-card>
         </div>
