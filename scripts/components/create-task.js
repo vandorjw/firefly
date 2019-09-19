@@ -1,6 +1,6 @@
 Vue.component('add-task', {
     props: ['taskId'],
-    data () {
+    data() {
         return {
             task: {
                 title: ''
@@ -13,19 +13,26 @@ Vue.component('add-task', {
         }
     },
     methods: {
-        addTask: function() {
-            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").add({
-                title: this.task.title,
-                owner: this.$store.getters.user.uid,
-                complete: false
-            })
-            .then(docRef => {
-                console.log("Document written with ID: ", docRef.id);
-            })
-            .catch(error => {
-                console.error("Error adding document: ", error);
+        addTask: function () {
 
-            });
+            if (!this.user) {
+                // We are anonymous, can't add a task.
+                // VueJS won't let us. FireStore won't let you either.
+                return;
+            }
+
+            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").add({
+                    title: this.task.title,
+                    owner: this.$store.getters.user.uid,
+                    complete: false
+                })
+                .then(docRef => {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch(error => {
+                    console.error("Error adding document: ", error);
+
+                });
         }
     },
     template: `
@@ -41,4 +48,4 @@ Vue.component('add-task', {
             </div>
             <input v-on:click="addTask" type="button" value="Create">
         </form>`
-  })
+})
