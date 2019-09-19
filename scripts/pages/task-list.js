@@ -10,9 +10,9 @@ const TaskList = Vue.component('TaskList', {
         }
     },
     methods: {
-        getBlogIds: function() {
+        getTaskIds: function() {
             var self = this;
-            firebase.firestore().collection('tasks').get().then(querySnapshot => {
+            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").get().then(querySnapshot => {
                 querySnapshot.forEach(function(doc) {
                     self.taskIds.push(doc.id);
                 });
@@ -20,7 +20,10 @@ const TaskList = Vue.component('TaskList', {
         }
     },
     created() {
-        this.getBlogIds();
+        if(this.user){
+            this.getTaskIds();
+        }
+        
     },
     updated() {
         dragula([document.querySelector('#left'), document.querySelector('#right')]);

@@ -14,7 +14,7 @@ Vue.component('add-task', {
     },
     methods: {
         addTask: function() {
-            firebase.firestore().collection('tasks').add({
+            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").add({
                 title: this.task.title,
                 owner: this.$store.getters.user.uid,
                 complete: false

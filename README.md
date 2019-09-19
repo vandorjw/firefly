@@ -43,7 +43,7 @@ service cloud.firestore {
       match /{userID} {
         allow create: if request.auth.uid == userID;
       }
-      match /{userId}/tasks/{taskID}{
+      match /{userID}/tasks/{taskID}{
         allow create, write, read: if request.auth.uid == userID;
       }
     }
