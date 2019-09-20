@@ -28,10 +28,16 @@ Vue.component('add-task', {
                 })
                 .then(docRef => {
                     console.log("Document written with ID: ", docRef.id);
+                    // docRef is not the actual document.
+                    // I can now fetch it with get, and shove it into the store. :poop:
+                    docRef.get().then(doc => {
+                        this.$store.commit('setTask', doc);
+                    })
+                    this.task.title = '';
                 })
                 .catch(error => {
                     console.error("Error adding document: ", error);
-
+                    this.task.title = '';
                 });
         }
     },
