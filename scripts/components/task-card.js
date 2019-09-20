@@ -1,29 +1,5 @@
 Vue.component('task-card', {
-    props: ['taskId'],
-    data () {
-        return {
-            task: {
-                title: '',
-                complete: ''
-            }
-        }
-    },
-    computed: {
-        user: function () {
-            return this.$store.getters.user
-        }
-    },
-    methods: {
-        getTask: function(taskId) {
-            let docRef = firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").doc(taskId);
-            docRef.get().then(doc => {
-                this.task = doc.data();
-            })
-        }
-    },
-    created() {
-        this.getTask(this.taskId);
-    },
+    props: ['task'],
     template: `
     <div class="cell">
         <div class="card">

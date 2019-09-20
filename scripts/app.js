@@ -32,7 +32,6 @@ var app = new Vue({
         docRef.get().then(docSnapshot => {
           if (docSnapshot.exists) {
             // This userId exists in my firestore collection.
-            console.log('exists');
           } else {
             // This userId does not exist in my firestore collection.
             docRef.set({}) // I just want to set the record, without any data.
@@ -45,6 +44,15 @@ var app = new Vue({
           }
         })
       }
+    },
+    getTasks() {
+      var self = this;
+      let taskDB = firebase.firestore().collection('users').doc(this.user.uid).collection("tasks");
+      taskDB.get().then(querySnapshot => {
+        querySnapshot.forEach(function (doc) {
+          self.$store.commit('setTask', doc);
+        });
+      })
     }
   },
   async created() {
@@ -54,5 +62,6 @@ var app = new Vue({
     let user = await this.checkAuthStatus();
     this.$store.commit('login', user);
     this.setUserCollection();
+    this.getTasks();
   }
 })
