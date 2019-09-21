@@ -42,16 +42,17 @@ Vue.component('add-task', {
         }
     },
     template: `
-        <form class="grid-container full">
-            <div class="grid-container full">
+        <form class="grid-container full small-12">
                 <div class="grid-x grid-padding-x">
                     <div class="small-12 cell">
-                        <label>Title
-                            <input v-model="task.title" class="cell" type="text" placeholder="Task Title">
-                        </label>
+                        <div class="input-group">
+                            <span class="input-group-label">New Task</span>
+                            <input v-model="task.title" class="input-group-field" type="text">
+                            <div class="input-group-button">
+                                <input v-on:click="addTask" type="submit" class="button" value="Create">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <input v-on:click="addTask" type="button" value="Create">
         </form>`
 })

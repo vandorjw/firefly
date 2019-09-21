@@ -8,9 +8,9 @@ const TaskList = Vue.component('TaskList', {
         dragula([document.getElementById('taskList')]);
     },
     template: `
-    <div class="grid-x grid-margin-x small-up-2 medium-up-3">
-        <div class="small-6" id="taskList">
-            <add-task></add-task>
+    <div class="grid-x grid-margin-x">
+        <add-task></add-task>
+        <div id="taskList" class="grid-container full small-12">
             <task-card v-for="(task, index) in tasks" v-bind:key="index" :task='task'></task-card>
         </div>
     </div>`
