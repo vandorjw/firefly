@@ -23,8 +23,8 @@ const Home = Vue.component('Home', {
         </ul>
 
         <h2>Is something broken?</h2>
-        <p>You are welcome to file a bug report <a >here</a></p>
-        <p>I know that this site does not work on Internet Explorer and older versions of Firefox and Google Chrome, because I used <a href="https://caniuse.com/#feat=template-literals">Template Literals</a></p>
+        <p>You are welcome to file a bug report <a href="https://github.com/vandorjw/firefly/issues">here</a>.</p>
+        <p>I know that this site does not work on Internet Explorer and older versions of Firefox and Google Chrome because I used <a href="https://caniuse.com/#feat=template-literals">Template Literals</a>.</p>
 
         <hr />
         <h5> Foot notes</h5>
