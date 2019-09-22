@@ -1,6 +1,7 @@
 const routes = [
     { path: '/tasks', component: TaskList },
     { path: '/blogs', component: BlogList },
+    { path: '/blogs/create', component: BlogCreate },
     { path: '/profile', component: Profile },
     { path: '/auth', component: AuthUI },
     { path: '/', component: Home}

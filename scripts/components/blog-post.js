@@ -9,7 +9,10 @@ Vue.component('blog-post', {
     },
     computed: {
         user: function () {
-            return this.$store.getters.user
+            return this.$store.getters.user;
+        },
+        postdate: function () {
+            return moment(this.blog.created).format("dddd, MMMM Do YYYY");;
         }
     },
     methods: {
@@ -25,13 +28,11 @@ Vue.component('blog-post', {
     },
     template: `
         <div class="blog-post">
-            <h3>{{ blog.title }} <small>3/6/2016</small></h3>
-            <img class="thumbnail" src="https://placehold.it/850x350">
-            <p>{{ blog.content }}</p>
+            <h3>{{ blog.title }} <small>{{ postdate }}</small></h3>
+            <div v-html="blog.content"></div>
             <div class="callout">
                 <ul class="menu simple">
-                    <li><a href="#">Author: {{ blog.author }}</a></li>
-                    <li><a href="#">Comments: 3</a></li>
+                    <li><a href="#">Author: {{ blog.authorEmail }}</a></li>
                 </ul>
             </div>
         </div>`
