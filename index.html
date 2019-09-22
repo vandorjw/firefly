@@ -11,6 +11,9 @@
   <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css" />
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
+  <!-- I want to use some font awesome icons -->
+  <script src="https://kit.fontawesome.com/cc62bccaa8.js" crossorigin="anonymous"></script>
+  
   <!-- I have chosen to use VueJS for this project.-->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
@@ -20,12 +23,6 @@
 <body>
   <div id="app">
     <top-bar v-bind:user="user"></top-bar>
-
-    <div class="callout large primary">
-      <div class="text-center">
-        <h1>{{ message }}</h1>
-      </div>
-    </div>
 
     <article class="grid-container">
         <!-- route outlet -->
@@ -63,6 +60,7 @@
   <script src="scripts/pages/profile-page.js"></script>
   <script src="scripts/pages/blog-list.js"></script>
   <script src="scripts/pages/task-list.js"></script>
+  <script src="scripts/pages/home.js"></script>
 
   <!-- Must remain last to avoid undefined -->
   <script src="scripts/router.js"></script>

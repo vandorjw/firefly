@@ -13,7 +13,7 @@ Vue.component('top-bar', {
     <div class="top-bar">
         <div class="top-bar-left">
             <ul class="menu">
-                <li class="menu-text">Firefly</li>
+                <li><router-link to="/">Home</router-link></li>
             </ul>
         </div>
         <div class="top-bar-right">

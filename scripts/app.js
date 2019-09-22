@@ -2,9 +2,6 @@ var app = new Vue({
   el: '#app',
   router,
   store,
-  data: {
-    message: 'Hello Vue!'
-  },
   computed: {
     user: function () {
       return this.$store.getters.user
