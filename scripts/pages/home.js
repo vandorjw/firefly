@@ -22,6 +22,10 @@ const Home = Vue.component('Home', {
             <li><em>Code Repository</em>: <a href="https://github.com/vandorjw/firefly">Github</a></li>
         </ul>
 
+        <h2>Is something broken?</h2>
+        <p>You are welcome to file a bug report <a >here</a></p>
+        <p>I know that this site does not work on Internet Explorer and older versions of Firefox and Google Chrome, because I used <a href="https://caniuse.com/#feat=template-literals">Template Literals</a></p>
+
         <hr />
         <h5> Foot notes</h5>
         <p><sup>1</sup> I used the word 'visible' instead of 'private' because the task data is visible to myself. As the project owner, I have ability to see the data inside Google Firestore. Even if I did not have that ability, I am not sure if the data is encrypted at rest and if Google employees are able to view/extract the data. Data privacy is a hot topic these days so I want to be as open and honest as I can be.</p>
