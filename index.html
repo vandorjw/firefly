@@ -7,17 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Hello, world!</title>
 
-  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation.min.css" />
+ 
   <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css" />
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <link type="text/css" rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css" />
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation.min.css" />
 
-  <!-- I want to use some font awesome icons -->
-  <script src="https://kit.fontawesome.com/cc62bccaa8.js" crossorigin="anonymous"></script>
-  
-  <!-- I have chosen to use VueJS for this project.-->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
-  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 
 <body>
@@ -31,11 +26,19 @@
 
   </div>
 
-  <!-- Javascript libraries required to render this page. -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
+  <!-- 
+  -- Javascript libraries required to render this project.
+  -- Think of this list as 'package.json' :smile:
+  -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>
+  <script src="https://kit.fontawesome.com/cc62bccaa8.js" crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
   <!-- Add Firebase products that you want to use -->
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-auth.js"></script>
@@ -53,12 +56,13 @@
   <script src="scripts/components/pagination-UI.js"></script>
   <script src="scripts/components/sticky-container.js"></script>
   <script src="scripts/components/task-card.js"></script>
-  <script src="scripts/components/create-post.js"></script>
   <script src="scripts/components/create-task.js"></script>
+  <script src="scripts/components/quill-editor.js"></script>
 
   <!--'pages' go here -->
   <script src="scripts/pages/profile-page.js"></script>
   <script src="scripts/pages/blog-list.js"></script>
+  <script src="scripts/pages/blog-create.js"></script>
   <script src="scripts/pages/task-list.js"></script>
   <script src="scripts/pages/home.js"></script>
 
