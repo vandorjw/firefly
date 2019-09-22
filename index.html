@@ -24,12 +24,6 @@
   <div id="app">
     <top-bar v-bind:user="user"></top-bar>
 
-    <div class="callout large primary">
-      <div class="text-center">
-        <h1>{{ message }}</h1>
-      </div>
-    </div>
-
     <article class="grid-container">
         <!-- route outlet -->
         <router-view></router-view>
@@ -66,6 +60,7 @@
   <script src="scripts/pages/profile-page.js"></script>
   <script src="scripts/pages/blog-list.js"></script>
   <script src="scripts/pages/task-list.js"></script>
+  <script src="scripts/pages/home.js"></script>
 
   <!-- Must remain last to avoid undefined -->
   <script src="scripts/router.js"></script>

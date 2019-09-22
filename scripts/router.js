@@ -2,7 +2,8 @@ const routes = [
     { path: '/tasks', component: TaskList },
     { path: '/blogs', component: BlogList },
     { path: '/profile', component: Profile },
-    { path: '/auth', component: AuthUI }
+    { path: '/auth', component: AuthUI },
+    { path: '/', component: Home}
   ]
 
   const router = new VueRouter({
