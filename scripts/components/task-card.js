@@ -65,13 +65,7 @@ Vue.component('task-card', {
                 // VueJS won't let us. FireStore won't let you either.
                 return;
             }
-
-            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").doc(this.taskID).delete().then(function() {
-                console.log("Task successfully deleted!");
-                self.$store.commit('deleteTask', self.taskID);
-            }).catch(function(error) {
-                console.error("Error removing task: ", error);
-            });
+            self.$store.commit('deleteTask', self.taskID);
         },
 
 
