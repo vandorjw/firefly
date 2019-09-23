@@ -22,6 +22,9 @@ const store = new Vuex.Store({
     updateTask(state, payload) {
       //Slight difference here because firestore doesn't return the update object.
       Vue.set(state.tasks, payload.id, payload.data)
-    }
+    },
+    deleteTask(state, id) {
+      Vue.delete(state.tasks, id)
+    },
   }
 })
