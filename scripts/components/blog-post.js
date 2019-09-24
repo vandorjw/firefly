@@ -15,11 +15,13 @@ Vue.component('blog-post', {
             return moment(this.blog.created).format("dddd, MMMM Do YYYY");;
         },
         isOwner: function () {
-            if (this.user.uid === this.blog.author) {
-                return true;
-            } else {
-                return false;
+            if (this.user) {
+                if (this.user.uid === this.blog.author) {
+                    return true;
+                }
             }
+            return false;
+
         }
     },
     methods: {
