@@ -15,18 +15,32 @@ const store = new Vuex.Store({
     logout(state) {
       state.user = null
     },
-    setTask(state, payload) {
-      // https://github.com/vuejs/vuex/issues/654#issuecomment-282067306
-      Vue.set(state.tasks, payload.id, payload.data());
+    createTask(state, payload) {
+      let task = new Task(state.user.uid);
+      let document = task.create(payload);
+      document.then(t => {
+        Vue.set(state.tasks, t.id, t.data());
+      })
+    },
+    getTask(state, id) {
+      let task = new Task(state.user.uid);
+      let document = task.get(id);
+      document.then(t => {
+        Vue.set(state.tasks, t.id, t.data());
+      })
     },
     updateTask(state, payload) {
-      //Slight difference here because firestore doesn't return the update object.
-      Vue.set(state.tasks, payload.id, payload.data)
+      let task = new Task(state.user.uid);
+      let document = task.update(payload.id, payload.delta);
+      document.then(t => {
+        Vue.set(state.tasks, payload.id, payload.data);
+      })
+
     },
     deleteTask(state, id) {
       let task = new Task(state.user.uid);
       task.delete(id);
-      Vue.delete(state.tasks, id)
-    },
+      Vue.delete(state.tasks, id);
+    }
   }
 })
