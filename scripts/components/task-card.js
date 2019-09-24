@@ -7,75 +7,30 @@ Vue.component('task-card', {
     },
     methods: {
         completeTask: function () {
-            console.log(`Trying to mark task: ${this.taskID} as complete`);
-            var self = this;
-            
-            if (!this.user) {
-                // We are anonymous, can't add a task.
-                // VueJS won't let us. FireStore won't let you either.
-                return;
-            }
-
-            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").doc(this.taskID).update({
-                complete: true
-            })
-            .then(function () {
-                let payload = {
-                    id: self.taskID,
-                    data: self.task
+            let payload = {
+                id: this.taskID,
+                data: this.task,
+                delta: {
+                    complete: true
                 }
-                payload.data.complete = true;
-                self.$store.commit('updateTask', payload);
-            })
-            .catch(error => {
-                console.error("Error adding document: ", error);
-            });
+            };
+            payload.data.complete = true;
+            this.$store.commit('updateTask', payload);
         },
         incompleteTask: function () {
-            console.log(`Trying to mark task: ${this.taskID} as incomplete`);
-            var self = this;
-            
-            if (!this.user) {
-                // We are anonymous, can't add a task.
-                // VueJS won't let us. FireStore won't let you either.
-                return;
-            }
-
-            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").doc(this.taskID).update({
-                complete: false
-            })
-            .then(function () {
-                let payload = {
-                    id: self.taskID,
-                    data: self.task
+            let payload = {
+                id: this.taskID,
+                data: this.task,
+                delta: {
+                    complete: false
                 }
-                payload.data.complete = false;
-                self.$store.commit('updateTask', payload);
-            })
-            .catch(error => {
-                console.error("Error adding document: ", error);
-            });
+            };
+            payload.data.complete = false;
+            this.$store.commit('updateTask', payload);
         },
         deleteTask: function () {
-            console.log(`Trying to delete task: ${this.taskID} `);
-            var self = this;
-            
-            if (!this.user) {
-                // We are anonymous, can't add a task.
-                // VueJS won't let us. FireStore won't let you either.
-                return;
-            }
-
-            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").doc(this.taskID).delete().then(function() {
-                console.log("Task successfully deleted!");
-                self.$store.commit('deleteTask', self.taskID);
-            }).catch(function(error) {
-                console.error("Error removing task: ", error);
-            });
+            this.$store.commit('deleteTask', this.taskID);
         },
-
-
-
     },
     template: `
     <div class="cell">
@@ -89,4 +44,4 @@ Vue.component('task-card', {
         </div>
     </div>
     `
-  })
+})

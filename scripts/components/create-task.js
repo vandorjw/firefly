@@ -14,31 +14,17 @@ Vue.component('add-task', {
     },
     methods: {
         addTask: function () {
-
             if (!this.user) {
                 // We are anonymous, can't add a task.
                 // VueJS won't let us. FireStore won't let you either.
                 return;
             }
-
-            firebase.firestore().collection('users').doc(this.user.uid).collection("tasks").add({
-                    title: this.task.title,
-                    owner: this.$store.getters.user.uid,
-                    complete: false
-                })
-                .then(docRef => {
-                    console.log("Document written with ID: ", docRef.id);
-                    // docRef is not the actual document.
-                    // I can now fetch it with get, and shove it into the store. :poop:
-                    docRef.get().then(doc => {
-                        this.$store.commit('setTask', doc);
-                    })
-                    this.task.title = '';
-                })
-                .catch(error => {
-                    console.error("Error adding document: ", error);
-                    this.task.title = '';
-                });
+            this.$store.commit('createTask', {
+                title: this.task.title,
+                owner: this.$store.getters.user.uid,
+                complete: false
+            });
+            this.task.title = '';
         }
     },
     template: `

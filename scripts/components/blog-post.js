@@ -28,7 +28,7 @@ Vue.component('blog-post', {
     },
     template: `
         <div class="blog-post">
-            <h3>{{ blog.title }} <small>{{ postdate }}</small></h3>
+            <h3>{{ blog.title }} <small>{{ postdate }}</small><router-link :to="{ name: 'BlogUpdate',  params: { id: blogId }}">edit</router-link></h3>
             <div v-html="blog.content"></div>
             <div class="callout">
                 <ul class="menu simple">
