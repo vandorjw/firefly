@@ -1,12 +1,5 @@
 Vue.component('blog-post', {
-    props: ['blogId'],
-    data() {
-        return {
-            blog: {
-                title: ''
-            }
-        }
-    },
+    props: ['blog', 'blogID'],
     computed: {
         user: function () {
             return this.$store.getters.user;
@@ -23,17 +16,6 @@ Vue.component('blog-post', {
             return false;
         }
     },
-    methods: {
-        getBlog: function (blogId) {
-            let docRef = firebase.firestore().collection('blogposts').doc(blogId);
-            docRef.get().then(doc => {
-                this.blog = doc.data();
-            })
-        }
-    },
-    created() {
-        this.getBlog(this.blogId);
-    },
     template: `
         <div class="blog-post">
             <h3>{{ blog.title }} <small>{{ postdate }}</small></h3>
@@ -41,7 +23,7 @@ Vue.component('blog-post', {
             <div class="callout">
                 <ul class="menu simple">
                     <li><a href="#">Author: {{ blog.authorEmail }}</a></li>
-                    <li><router-link v-if="isOwner" :to="{ name: 'BlogUpdate',  params: { id: blogId }}">edit</router-link></li>
+                    <li><router-link v-if="isOwner" :to="{ name: 'BlogUpdate',  params: { id: blogID }}">edit</router-link></li>
                 </ul>
             </div>
         </div>`

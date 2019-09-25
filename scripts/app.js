@@ -44,8 +44,8 @@ var app = new Vue({
     },
     getTasks() {
       var self = this;
-      let taskDB = firebase.firestore().collection('users').doc(this.user.uid).collection("tasks");
-      taskDB.get().then(querySnapshot => {
+      let T = new Task(this.user.uid);
+      T.db.get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {
           self.$store.commit('getTask', doc.id);
         });
