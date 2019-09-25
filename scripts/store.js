@@ -15,7 +15,8 @@ const store = new Vuex.Store({
       state.user = payload
     },
     logout(state) {
-      state.user = null
+      state.user = null,
+      state.tasks = null
     },
     createTask(state, payload) {
       let task = new Task(state.user.uid);
