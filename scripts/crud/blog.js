@@ -9,8 +9,8 @@ function Blog() {
     this.db = firebase.firestore().collection('blogposts');
 };
 
-Blog.prototype.create = function (dataObj) {
-    this.db.add({
+Blog.prototype.create = async function (dataObj) {
+   await this.db.add({
             dataObj
         })
         .then(docRef => {
@@ -21,8 +21,8 @@ Blog.prototype.create = function (dataObj) {
         });
 };
 
-Blog.prototype.get = function (id) {
-    this.db.doc(id).get()
+Blog.prototype.get = async function (id) {
+    await this.db.doc(id).get()
         .then(doc => {
             this.data = doc.data();
             return this.data;
@@ -32,8 +32,8 @@ Blog.prototype.get = function (id) {
         });
 };
 
-Blog.prototype.update = function (id, payload) {
-    this.db.doc(id).update(payload)
+Blog.prototype.update = async function (id, payload) {
+    await this.db.doc(id).update(payload)
         .then(function () {
 
         })
@@ -42,8 +42,8 @@ Blog.prototype.update = function (id, payload) {
         });
 };
 
-Blog.prototype.delete = function (id) {
-    this.db.doc(id).delete()
+Blog.prototype.delete = async function (id) {
+    await this.db.doc(id).delete()
         .then(function () {
             console.log("Document successfully deleted!");
         })
