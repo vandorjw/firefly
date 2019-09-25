@@ -7,7 +7,7 @@ const Home = Vue.component('Home', {
             </div>
         </div>
         <h2>What is this?</h2>
-        <p>I created this project to explore Google Firebase and netlify. A post on Reddit discussed multiple ways to serve private information on a public host like netlify for free.
+        <p>I created this project to explore <a href="https://firebase.google.com">Google Firebase</a> and Netlify. A post on Reddit discussed multiple ways to serve private information on a public host like <a href="https://www.netlify.com/">Netlify</a> for free.
         My idea was to store information in Google Firebase, (which has a free plan), and only serve that information to authenticated users.</p>
 
         <p>Tasks are only visible<sup>1</sup> to the user who created them.</p>
