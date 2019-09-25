@@ -22,7 +22,7 @@ Vue.component('blog-post', {
             <div v-html="blog.content"></div>
             <div class="callout">
                 <ul class="menu simple">
-                    <li><a href="#">Author: {{ blog.authorEmail }}</a></li>
+                    <li>Author: {{ blog.authorEmail }}</li>
                     <li><router-link v-if="isOwner" :to="{ name: 'BlogUpdate',  params: { id: blogID }}">edit</router-link></li>
                 </ul>
             </div>
