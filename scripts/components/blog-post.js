@@ -21,7 +21,6 @@ Vue.component('blog-post', {
                 }
             }
             return false;
-
         }
     },
     methods: {

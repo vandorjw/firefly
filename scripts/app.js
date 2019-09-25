@@ -57,8 +57,10 @@ var app = new Vue({
     // this uses Vuex to check if a user is signed in
     // check out mutations in the store.js file
     let user = await this.checkAuthStatus();
-    this.$store.commit('login', user);
-    this.setUserCollection();
-    this.getTasks();
+    if(user){
+      this.$store.commit('login', user);
+      this.setUserCollection();
+      this.getTasks();
+    }
   }
 })
