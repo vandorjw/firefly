@@ -14,20 +14,18 @@ const BlogCreate = Vue.component('BlogCreate', {
     },
     methods: {
         addBlogPost: function () {
-            firebase.firestore().collection('blogposts').add({
-                    title: this.blog.title,
-                    content: this.blog.content,
-                    author: this.$store.getters.user.uid,
-                    authorEmail: this.$store.getters.user.email,
-                    created: Date.now()
-                })
-                .then(docRef => {
-                    console.log("Document written with ID: ", docRef.id);
-                })
-                .catch(error => {
-                    console.error("Error adding document: ", error);
-
-                });
+            if (!this.user) {
+                // We are anonymous, can't add a task.
+                // VueJS won't let us. FireStore won't let you either.
+                return;
+            }
+            this.$store.commit('createBlog', {
+                title: this.blog.title,
+                content: this.blog.content,
+                author: this.$store.getters.user.uid,
+                authorEmail: this.$store.getters.user.email,
+                created: Date.now()
+            });
         }
     },
     template: `

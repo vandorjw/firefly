@@ -12,11 +12,11 @@ const BlogList = Vue.component('BlogList', {
             let self = this;
             let B = new Blog();
             B.db.get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(function (doc){
-                    self.$store.commit('getBlog', doc.id);
+                .then(querySnapshot => {
+                    querySnapshot.forEach(function (doc) {
+                        self.$store.commit('getBlog', doc.id);
+                    })
                 })
-            })
         }
     },
     created() {
@@ -30,4 +30,4 @@ const BlogList = Vue.component('BlogList', {
         <sticky-container></sticky-container>
         <pagination-ui></pagination-ui>
     </div>`
-  })
+})

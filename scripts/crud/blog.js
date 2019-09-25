@@ -11,9 +11,7 @@ function Blog() {
 
 Blog.prototype.create = async function (dataObj) {
     let self = this;
-    await this.db.add({
-            dataObj
-        })
+    await this.db.add(dataObj)
         .then(docRef => {
             console.log("Document written with ID: ", docRef.id);
             return self.get(docRef.id);
