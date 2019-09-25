@@ -26,6 +26,7 @@ const BlogCreate = Vue.component('BlogCreate', {
                 authorEmail: this.$store.getters.user.email,
                 created: Date.now()
             });
+            router.push({name: 'BlogList'});
         }
     },
     template: `

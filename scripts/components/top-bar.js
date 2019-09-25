@@ -1,5 +1,9 @@
 Vue.component('top-bar', {
-    props: ['user'],
+    computed: {
+        user: function () {
+            return this.$store.getters.user
+        }
+    },
     methods: {
         signOut() {
             firebase.auth().signOut().then(function () {
@@ -13,6 +17,8 @@ Vue.component('top-bar', {
         if(this.user){
             let topBarMenu = $('.top-bar');
             var elem = new Foundation.DropdownMenu(topBarMenu, {});
+        } else {
+            $('.top-bar').foundation('_destroy');
         }
       },
     template: `
