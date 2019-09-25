@@ -18,6 +18,7 @@ const BlogUpdate = Vue.component('BlogUpdate', {
                 }
             };
             this.$store.commit('updateBlog', payload);
+            router.push({name: 'BlogList'});
         }
     },
     template: `
