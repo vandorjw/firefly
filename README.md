@@ -33,8 +33,7 @@ I have a couple of collections, and still experimenting but I'll try and publish
 
 I watched this [video](https://www.youtube.com/watch?v=eW5MdE3ZcAw) on how to configure the rules to my firestore database. 
 
-These are the rules I came up with. (I am not sure if `create` is a thing but it seems to have worked.)
-
+These are the rules I came up with so far.
 ```
 rules_version = '2';
 service cloud.firestore {
@@ -46,6 +45,11 @@ service cloud.firestore {
       match /{userID}/tasks/{taskID}{
         allow create, write, read: if request.auth.uid == userID;
       }
+    }
+    match /blogposts/{post} {
+    	allow read: if true;
+      allow create: if request.auth.uid != null;
+      allow write: if request.auth.uid == resource.data.author;
     }
     match /{restOfPath=**} {
       allow read: if true;
