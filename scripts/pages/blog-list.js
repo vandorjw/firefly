@@ -1,33 +1,33 @@
 const BlogList = Vue.component('BlogList', {
-    data () {
-        return {
-            blogIds: [] 
-        }
-    },
     computed: {
         user: function () {
             return this.$store.getters.user
+        },
+        blogs: function () {
+            return this.$store.getters.blogs
         }
     },
     methods: {
-        getBlogIds: function() {
-            var self = this;
-            firebase.firestore().collection('blogposts').get().then(querySnapshot => {
-                querySnapshot.forEach(function(doc) {
-                    self.blogIds.push(doc.id);
-                });
-            })
+        getBlogs: function () {
+            let self = this;
+            let B = new Blog();
+            B.db.get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach(function (doc) {
+                        self.$store.commit('getBlog', doc.id);
+                    })
+                })
         }
     },
     created() {
-        this.getBlogIds();
+        this.getBlogs();
     },
     template: `
     <div class="grid-x grid-margin-x" id="content">
         <div class="medium-9 cell">
-            <blog-post v-for="id in blogIds" v-bind:key="id" :blogId='id'></blog-post>
+            <blog-post v-for="(blog, index) in blogs" v-bind:key="index" :blog='blog' :blogID='index'></blog-post>
         </div>
         <sticky-container></sticky-container>
         <pagination-ui></pagination-ui>
     </div>`
-  })
+})

@@ -44,8 +44,8 @@ var app = new Vue({
     },
     getTasks() {
       var self = this;
-      let taskDB = firebase.firestore().collection('users').doc(this.user.uid).collection("tasks");
-      taskDB.get().then(querySnapshot => {
+      let T = new Task(this.user.uid);
+      T.db.get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {
           self.$store.commit('getTask', doc.id);
         });
@@ -57,8 +57,10 @@ var app = new Vue({
     // this uses Vuex to check if a user is signed in
     // check out mutations in the store.js file
     let user = await this.checkAuthStatus();
-    this.$store.commit('login', user);
-    this.setUserCollection();
-    this.getTasks();
+    if (user) {
+      this.$store.commit('login', user);
+      this.setUserCollection();
+      this.getTasks();
+    }
   }
 })

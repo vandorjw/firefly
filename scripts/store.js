@@ -2,11 +2,13 @@ const store = new Vuex.Store({
   // strict: true,
   state: {
     user: null,
-    tasks: {}
+    tasks: {},
+    blogs: {}
   },
   getters: {
     user: state => state.user,
-    tasks: state => state.tasks
+    tasks: state => state.tasks,
+    blogs: state => state.blogs
   },
   mutations: {
     login(state, payload) {
@@ -41,6 +43,33 @@ const store = new Vuex.Store({
       let task = new Task(state.user.uid);
       task.delete(id);
       Vue.delete(state.tasks, id);
+    },
+    // ========= BLOG ==== //
+    createBlog(state, payload) {
+      let blog = new Blog();
+      let document = blog.create(payload);
+      document.then(t => {
+        Vue.set(state.blogs, t.id, t.data());
+      })
+    },
+    getBlog(state, id) {
+      let blog = new Blog();
+      let document = blog.get(id);
+      document.then(t => {
+        Vue.set(state.blogs, t.id, t.data());
+      })
+    },
+    updateBlog(state, payload) {
+      let blog = new Blog();
+      let document = blog.update(payload.id, payload.delta);
+      document.then(t => {
+        Vue.set(state.blogs, payload.id, payload.data);
+      })
+    },
+    deleteBlog(state, id) {
+      let blog = new Blog();
+      blog.delete(id);
+      Vue.delete(state.blogs, id);
     }
   }
 })
